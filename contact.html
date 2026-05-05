@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NavaStore – Contact</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body.dark { background: #0f172a; color: #e2e8f0; }
+    body.dark .bg-white { background: #1e293b; }
+    body.dark .border-gray-200 { border-color: #334155; }
+    body.dark .text-gray-600 { color: #cbd5e6; }
+    .mobile-menu { position: fixed; top: 0; right: 0; width: 260px; height: 100%; background: white; transform: translateX(100%); transition: 0.3s; z-index: 1000; }
+    .mobile-menu.open { transform: translateX(0); }
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 999; }
+    .overlay.active { opacity: 1; visibility: visible; }
+  </style>
+</head>
+<body>
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
+  <div class="max-w-7xl mx-auto px-5 py-4 flex justify-between items-center">
+    <a href="index.html" class="text-2xl font-bold">NavaStore</a>
+    <nav class="hidden md:flex gap-6 text-sm font-medium">
+      <a href="index.html">Home</a><a href="products.html">Shop</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+    </nav>
+    <div class="flex gap-3">
+      <button id="themeBtn" class="p-2 rounded-full bg-gray-100">🌙</button>
+      <button id="menuBtn" class="md:hidden p-2">☰</button>
+    </div>
+  </div>
+</header>
+<div id="mobileMenu" class="mobile-menu p-6 flex flex-col gap-6 bg-white"><button id="closeMenu" class="self-end text-2xl">&times;</button><a href="index.html">Home</a><a href="products.html">Shop</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+<div id="overlay" class="overlay"></div>
+
+<main class="max-w-7xl mx-auto px-5 py-12">
+  <div class="text-center max-w-2xl mx-auto mb-12">
+    <h1 class="text-4xl font-bold">Get in touch</h1>
+    <p class="text-gray-500 mt-2">We usually reply within 2 hours — reach out via WhatsApp, email, or the form below.</p>
+  </div>
+  <div class="grid md:grid-cols-2 gap-12">
+    <div class="space-y-6">
+      <a href="mailto:hello@navastore.com" class="flex items-center gap-4 p-4 border rounded-xl hover:border-gray-400 transition"><span class="text-3xl">📧</span><div><h3 class="font-semibold">Email us</h3><p class="text-gray-500">hello@navastore.com</p></div></a>
+      <a href="tel:+2349162572175" class="flex items-center gap-4 p-4 border rounded-xl hover:border-gray-400 transition"><span class="text-3xl">📞</span><div><h3 class="font-semibold">Call us</h3><p class="text-gray-500">+234 916 257 2175</p></div></a>
+      <a href="https://wa.me/2349162572175" target="_blank" class="flex items-center gap-4 p-4 border rounded-xl hover:border-green-500 transition bg-green-50/20"><span class="text-3xl">💬</span><div><h3 class="font-semibold">WhatsApp chat</h3><p class="text-gray-500">Tap to message instantly</p></div></a>
+      <div class="p-4 bg-gray-50 rounded-xl"><h3 class="font-semibold">📍 Location</h3><p class="text-gray-500 mt-1">23, Allen Avenue, Ikeja, Lagos, Nigeria</p><p class="text-xs text-gray-400 mt-2">Mon–Fri: 9am–6pm | Sat: 10am–2pm</p></div>
+    </div>
+    <div class="border rounded-2xl p-6 shadow-sm">
+      <h2 class="text-xl font-semibold mb-4">Send us a message</h2>
+      <div class="space-y-4">
+        <input type="text" id="name" placeholder="Your name" class="w-full p-3 border rounded-xl">
+        <input type="email" id="email" placeholder="Your email" class="w-full p-3 border rounded-xl">
+        <textarea id="message" rows="4" placeholder="How can we help?" class="w-full p-3 border rounded-xl"></textarea>
+        <div class="flex gap-4">
+          <button id="sendWhatsAppBtn" class="flex-1 bg-green-600 text-white py-3 rounded-xl font-medium">📱 Send via WhatsApp</button>
+          <button id="sendGmailBtn" class="flex-1 bg-gray-800 text-white py-3 rounded-xl font-medium">✉️ Send via Gmail</button>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 mt-4">Your message will open in WhatsApp or Gmail – no data stored on our server.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="border-t py-8 text-center text-sm text-gray-500">
+  © 2025 NavaStore. <a href="about.html" class="underline">About</a> | <a href="contact.html" class="underline">Contact</a>
+</footer>
+
+<script>
+  // mobile menu & theme
+  const menuBtn=document.getElementById("menuBtn"), mobileMenu=document.getElementById("mobileMenu"), overlayDiv=document.getElementById("overlay"), closeMenuBtn=document.getElementById("closeMenu");
+  function openMobile(){mobileMenu.classList.add("open");overlayDiv.classList.add("active");document.body.style.overflow="hidden";}
+  function closeMobile(){mobileMenu.classList.remove("open");overlayDiv.classList.remove("active");document.body.style.overflow="";}
+  menuBtn?.addEventListener("click",openMobile); closeMenuBtn?.addEventListener("click",closeMobile); overlayDiv?.addEventListener("click",closeMobile);
+  document.querySelectorAll("#mobileMenu a").forEach(a=>a.addEventListener("click",closeMobile));
+  const themeBtn=document.getElementById("themeBtn");
+  themeBtn.addEventListener("click",()=>{document.body.classList.toggle("dark"); const isDark=document.body.classList.contains("dark"); themeBtn.textContent=isDark?"☀️":"🌙"; localStorage.setItem("theme",isDark?"dark":"light"); gsap.to(themeBtn,{scale:1.2,duration:0.1,yoyo:true,repeat:1});});
+  if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark"); themeBtn.textContent="☀️";}
+  // form handlers
+  const nameInp=document.getElementById("name"), emailInp=document.getElementById("email"), msgInp=document.getElementById("message");
+  function getMsg(){ return `Name: ${nameInp.value}\nEmail: ${emailInp.value}\nMessage: ${msgInp.value}`; }
+  document.getElementById("sendWhatsAppBtn").addEventListener("click",()=>{if(!nameInp.value||!emailInp.value||!msgInp.value){alert("Please fill all fields"); return;} window.open(`https://wa.me/2349162572175?text=${encodeURIComponent(getMsg())}`,'_blank');});
+  document.getElementById("sendGmailBtn").addEventListener("click",()=>{if(!nameInp.value||!emailInp.value||!msgInp.value){alert("Please fill all fields"); return;} window.location.href=`mailto:hello@navastore.com?subject=Message from ${encodeURIComponent(nameInp.value)}&body=${encodeURIComponent(getMsg())}`;});
+  gsap.from("main",{opacity:0,y:20,duration:0.6});
+</script>
+</body>
+</html>
